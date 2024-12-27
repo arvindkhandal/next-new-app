@@ -1,12 +1,28 @@
+// Define the datasource block to connect to the database
+datasource db {
+  provider = "postgresql"  // Change this to your database provider (e.g., "mysql", "sqlite")
+  url      = env("DATABASE_URL")  // The database URL will be loaded from the .env file
+}
+
+// Define the generator block for Prisma Client
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Define the Menu model
 model Menu {
   id        String   @id @default(uuid())
-  name      String
-  parentId  String?
+  name     String
+  path      String?
+  icon      String?
   depth     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  
-  // Relations
-  parent    Menu?    @relation("MenuToMenu", fields: [parentId], references: [id])
-  children  Menu[]   @relation("MenuToMenu")
+
+  parentId   String?
+  parent     Menu?    @relation("MenuToMenu", fields: [parentId], references: [id])
+  children   Menu[]   @relation("MenuToMenu")
+
+  @@map("menus")
 }
+

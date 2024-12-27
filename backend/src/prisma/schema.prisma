@@ -10,13 +10,16 @@ datasource db {
 model Menu {
   id        String   @id @default(uuid())
   name      String
-  parentId  String?
+  url       String?
+  icon      String?
   depth     Int      @default(0)
-  parent    Menu?    @relation("MenuToMenu", fields: [parentId], references: [id])
-  children  Menu[]   @relation("MenuToMenu")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  order Int @default(0)
 
-  @@index([parentId])
+  // Self-referential relations
+  parent     Menu?   @relation("MenuToMenu", fields: [parentId], references: [id])
+  parentId   String?
+  children   Menu[]  @relation("MenuToMenu")
+
+  @@map("menus")
 }
