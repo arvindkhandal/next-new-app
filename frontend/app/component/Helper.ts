@@ -8,12 +8,10 @@ export const fetchMenuData = async () => {
       console.log(data, "data");
     return (data)
     } else {
-      // setError('Failed to fetch menu data');
+      console.error("Failed to delete menu item");
     }
   } catch (error) {
-    // setError('An error occurred while fetching the data');
-  } finally {
-    // setLoading(false);
+    console.error("An error occurred while updating the menu item:", error);
   }
 };
 
@@ -25,12 +23,10 @@ export const fetchMenuDataParentId = async (id) => {
     if (response.ok) {
     return (data)
     } else {
-      // setError('Failed to fetch menu data');
+      console.error("Failed to delete menu item");
     }
   } catch (error) {
-    // setError('An error occurred while fetching the data');
-  } finally {
-    // setLoading(false);
+    console.error("An error occurred while updating the menu item:", error);
   }
 };
 
