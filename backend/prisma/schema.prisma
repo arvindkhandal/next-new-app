@@ -1,0 +1,12 @@
+model Menu {
+  id        String   @id @default(uuid())
+  name      String
+  parentId  String?
+  depth     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  parent    Menu?    @relation("MenuToMenu", fields: [parentId], references: [id])
+  children  Menu[]   @relation("MenuToMenu")
+}
