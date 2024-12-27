@@ -1,32 +1,33 @@
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
 export const fetchMenuData = async () => {
   try {
-    const response = await fetch("http://localhost:3001/menu"); // This calls your API route
-    const data = await (response.json());
+    const response = await fetch(`${BASE_URL}/menu`);
+    const data = await response.json();
 
     if (response.ok) {
-      // setMenu(data);
       console.log(data, "data");
-    return (data)
+      return data;
     } else {
-      console.error("Failed to delete menu item");
+      console.error("Failed to fetch menu data");
     }
   } catch (error) {
-    console.error("An error occurred while updating the menu item:", error);
+    console.error("An error occurred while fetching the menu data:", error);
   }
 };
 
-export const fetchMenuDataParentId = async (id) => {
+export const fetchMenuDataParentId = async (id: number | string) => {
   try {
-    const response = await fetch(`http://localhost:3001/menu/${id}`); // This calls your API route
-    const data = await (response.json());
+    const response = await fetch(`${BASE_URL}/menu/${id}`);
+    const data = await response.json();
 
     if (response.ok) {
-    return (data)
+      return data;
     } else {
-      console.error("Failed to delete menu item");
+      console.error("Failed to fetch menu data by parent ID");
     }
   } catch (error) {
-    console.error("An error occurred while updating the menu item:", error);
+    console.error("An error occurred while fetching the menu data by parent ID:", error);
   }
 };
 
@@ -35,12 +36,12 @@ export const createMenuItem = async (newMenuItem: {
   description?: string;
 }) => {
   try {
-    const response = await fetch("http://localhost:3001/menu", {
+    const response = await fetch(`${BASE_URL}/menu`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", // Tell the server it's receiving JSON
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(newMenuItem), // Send the new menu item as JSON
+      body: JSON.stringify(newMenuItem),
     });
 
     if (response.ok) {
@@ -55,16 +56,16 @@ export const createMenuItem = async (newMenuItem: {
 };
 
 export const updateMenuItem = async (
-  id: number,
-  updatedMenuItem: { name: string;  }
+  id: number | string,
+  updatedMenuItem: { name: string }
 ) => {
   try {
-    const response = await fetch(`http://localhost:3001/menu/${id}`, {
+    const response = await fetch(`${BASE_URL}/menu/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedMenuItem), // Send updated data as JSON
+      body: JSON.stringify(updatedMenuItem),
     });
 
     if (response.ok) {
@@ -78,9 +79,9 @@ export const updateMenuItem = async (
   }
 };
 
-export const deleteMenuItem = async (id: number) => {
+export const deleteMenuItem = async (id: number | string) => {
   try {
-    const response = await fetch(`http://localhost:3001/menu/${id}`, {
+    const response = await fetch(`${BASE_URL}/menu/${id}`, {
       method: "DELETE",
     });
 
@@ -93,3 +94,5 @@ export const deleteMenuItem = async (id: number) => {
     console.error("An error occurred while deleting the menu item:", error);
   }
 };
+
+

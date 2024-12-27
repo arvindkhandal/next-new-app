@@ -8,7 +8,7 @@ interface ClientLayoutProps {
   children: ReactNode;
 }
 
-export default function ClientLayout({ children }: any) {
+export default function ClientLayout({ children }: ClientLayoutProps) {
   return (
     <Providers>
       <div className="flex h-screen bg-background">

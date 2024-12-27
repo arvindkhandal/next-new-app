@@ -1,10 +1,6 @@
 import { MenuContent } from "../component/main-content"
 
-export default function Systems({
-    children,
-  }: {
-    children: React.ReactNode
-  }) {
+export default function Systems() {
     return (
   <div className="flex h-screen bg-background">
         {/* <Sidebar /> */}
